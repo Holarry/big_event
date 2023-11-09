@@ -4,8 +4,11 @@ import com.holary.mapper.UserMapper;
 import com.holary.pojo.User;
 import com.holary.service.UserService;
 import com.holary.utils.Md5Util;
+import com.holary.utils.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 /**
  * @Author: Holary
@@ -50,7 +53,33 @@ public class UserServiceImpl implements UserService {
      * @return: void
      */
     @Override
-    public void updateUserBasicInfo(User user) {
+    public void updateBasicInfo(User user) {
         userMapper.updateUserBasicInfo(user);
+    }
+
+    /**
+     * description: 修改用户头像
+     *
+     * @param avatarUrl: 头像url地址
+     * @return: void
+     */
+    @Override
+    public void updateAvatar(String avatarUrl) {
+        Map<String, Object> map = ThreadLocalUtil.get();
+        Integer id = (Integer) map.get("id");
+        userMapper.updateUserAvatar(id, avatarUrl);
+    }
+
+    /**
+     * description: 用户修改密码
+     *
+     * @param password: 用户新密码
+     * @return: void
+     */
+    @Override
+    public void updatePassword(String password) {
+        Map<String, Object> map = ThreadLocalUtil.get();
+        Integer id = (Integer) map.get("id");
+        userMapper.updateUserPassword(id, password);
     }
 }

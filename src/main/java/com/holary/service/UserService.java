@@ -31,5 +31,21 @@ public interface UserService {
      * @param user:
      * @return: void
      */
-    void updateUserBasicInfo(User user);
+    void updateBasicInfo(User user);
+
+    /**
+     * description: 修改用户头像
+     *
+     * @param avatarUrl: 头像url地址
+     * @return: void
+     */
+    void updateAvatar(String avatarUrl);
+
+    /**
+     * description: 用户修改密码
+     *
+     * @param password: 用户新密码
+     * @return: void
+     */
+    void updatePassword(String password);
 }

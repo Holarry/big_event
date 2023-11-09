@@ -24,4 +24,20 @@
             update_time = now()
         where id = #{id}
     </update>
+
+    <!--修改用户头像-->
+    <update id="updateUserAvatar">
+        update user
+        set user_pic    = #{avatarUrl},
+            update_time = now()
+        where id = #{id}
+    </update>
+
+    <!--修改用户密码-->
+    <update id="updateUserPassword">
+        update user
+        set password    = #{password},
+            update_time = now()
+        where id = #{id}
+    </update>
 </mapper>

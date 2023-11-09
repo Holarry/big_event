@@ -34,4 +34,22 @@ public interface UserMapper {
      * @return: void
      */
     void updateUserBasicInfo(User user);
+
+    /**
+     * description: 修改用户头像
+     *
+     * @param avatarUrl: 头像url地址
+     * @param id:        用户id
+     * @return: void
+     */
+    void updateUserAvatar(Integer id, String avatarUrl);
+
+    /**
+     * description: 用户修改密码
+     *
+     * @param id:       用户id
+     * @param password: 用户新密码
+     * @return: void
+     */
+    void updateUserPassword(Integer id, String password);
 }

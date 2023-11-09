@@ -7,7 +7,9 @@ import com.holary.utils.JwtUtil;
 import com.holary.utils.Md5Util;
 import com.holary.utils.ThreadLocalUtil;
 import jakarta.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,8 +81,8 @@ public class UserController {
      *
      * @return: com.holary.pojo.Result<com.holary.pojo.User>
      */
-    @GetMapping("/getUserInfo")
-    public Result<User> getUserInfo() {
+    @GetMapping("/getDetailInfo")
+    public Result<User> getDetailInfo() {
         Map<String, Object> map = ThreadLocalUtil.get();
         String username = (String) map.get("username");
         User user = userService.findByUsername(username);
@@ -93,14 +95,61 @@ public class UserController {
      * @param user:
      * @return: com.holary.pojo.Result
      */
-    @PutMapping("/updateUserBasicInfo")
-    public Result updateUserBasicInfo(@RequestBody @Validated User user) {
+    @PutMapping("/updateBasicInfo")
+    public Result updateBasicInfo(@RequestBody @Validated User user) {
         Map<String, Object> map = ThreadLocalUtil.get();
         Integer id = (Integer) map.get("id");
         if (!id.equals(user.getId())) {
             return Result.error("用户id不匹配!");
         }
-        userService.updateUserBasicInfo(user);
+        userService.updateBasicInfo(user);
+        return Result.success();
+    }
+
+    /**
+     * description: 修改用户头像
+     *
+     * @param avatarUrl: 头像url地址
+     * @return: com.holary.pojo.Result
+     */
+    @PatchMapping("/updateAvatar")
+    public Result updateAvatar(@RequestParam @URL String avatarUrl) {
+        userService.updateAvatar(avatarUrl);
+        return Result.success();
+    }
+
+    /**
+     * description: 用户修改密码
+     *
+     * @param params:
+     * @return: com.holary.pojo.Result
+     */
+    @PatchMapping("/updatePassword")
+    public Result updatePassword(@RequestBody Map<String, String> params) {
+        String oldPwd = params.get("oldPwd");
+        String newPwd = params.get("newPwd");
+        String rePwd = params.get("rePwd");
+
+        // 判断密码是否输入完整
+        if (!StringUtils.hasLength(oldPwd) || !StringUtils.hasLength(newPwd) || !StringUtils.hasLength(rePwd)) {
+            return Result.error("密码未填写完整!");
+        }
+
+        Map<String, Object> map = ThreadLocalUtil.get();
+        String username = (String) map.get("username");
+        User user = userService.findByUsername(username);
+        // 判断原密码是否正确
+        if (!user.getPassword().equals(Md5Util.getMD5String(oldPwd))) {
+            return Result.error("原密码错误!");
+        }
+
+        // 判断两次新密码是否一致
+        if (!newPwd.equals(rePwd)) {
+            return Result.error("新密码输入不一致!");
+        }
+
+        // 修改密码
+        userService.updatePassword(Md5Util.getMD5String(newPwd));
         return Result.success();
     }
 }
