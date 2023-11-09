@@ -1,6 +1,7 @@
 package com.holary.interceptor;
 
 import com.holary.utils.JwtUtil;
+import com.holary.utils.ThreadLocalUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         String token = request.getHeader("Authorization");
         try {
             Map<String, Object> claims = JwtUtil.parseToken(token);
+            // 将claims数据存入ThreadLocal中
+            ThreadLocalUtil.set(claims);
             // 放行
             return true;
         } catch (Exception e) {
@@ -28,5 +31,11 @@ public class LoginInterceptor implements HandlerInterceptor {
             // 拦截
             return false;
         }
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        // 清空ThreadLocal中的数据
+        ThreadLocalUtil.remove();
     }
 }
