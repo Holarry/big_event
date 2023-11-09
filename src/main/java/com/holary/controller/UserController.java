@@ -5,9 +5,11 @@ import com.holary.pojo.User;
 import com.holary.service.UserService;
 import com.holary.utils.JwtUtil;
 import com.holary.utils.Md5Util;
+import com.holary.utils.ThreadLocalUtil;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,7 +56,7 @@ public class UserController {
      * @return: com.holary.pojo.Result<java.lang.String>
      */
     @PostMapping("/login")
-    public Result login(@Pattern(regexp = "^\\S{5,16}$") String username, @Pattern(regexp = "^\\S{5,16}$") String password) {
+    public Result<String> login(@Pattern(regexp = "^\\S{5,16}$") String username, @Pattern(regexp = "^\\S{5,16}$") String password) {
         // 查询用户是否存在
         User user = userService.findByUsername(username);
         if (user == null) {
@@ -73,5 +75,18 @@ public class UserController {
         String token = JwtUtil.genToken(claims);
 
         return Result.success(token);
+    }
+
+    /**
+     * description: 查询用户详细信息
+     *
+     * @return: com.holary.pojo.Result<com.holary.pojo.User>
+     */
+    @GetMapping("/getUserInfo")
+    public Result<User> getUserInfo() {
+        Map<String, Object> map = ThreadLocalUtil.get();
+        String username = (String) map.get("username");
+        User user = userService.findByUsername(username);
+        return Result.success(user);
     }
 }
