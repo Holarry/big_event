@@ -24,4 +24,12 @@ public interface UserService {
      * @return: void
      */
     void register(String username, String password);
+
+    /**
+     * description: 修改用户基本信息
+     *
+     * @param user:
+     * @return: void
+     */
+    void updateUserBasicInfo(User user);
 }

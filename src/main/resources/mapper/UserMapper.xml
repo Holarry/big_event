@@ -15,4 +15,13 @@
         insert into user(username, password, create_time, update_time)
         values (#{username}, #{md5Password}, now(), now())
     </insert>
+
+    <!--修改用户基本信息-->
+    <update id="updateUserBasicInfo">
+        update user
+        set nickname    = #{nickname},
+            email       = #{email},
+            update_time = now()
+        where id = #{id}
+    </update>
 </mapper>

@@ -26,4 +26,12 @@ public interface UserMapper {
      * @return: void
      */
     void insertUser(String username, String md5Password);
+
+    /**
+     * description: 修改用户基本信息
+     *
+     * @param user:
+     * @return: void
+     */
+    void updateUserBasicInfo(User user);
 }

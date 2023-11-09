@@ -42,4 +42,15 @@ public class UserServiceImpl implements UserService {
         // 添加用户
         userMapper.insertUser(username, md5Password);
     }
+
+    /**
+     * description: 修改用户基本信息
+     *
+     * @param user:
+     * @return: void
+     */
+    @Override
+    public void updateUserBasicInfo(User user) {
+        userMapper.updateUserBasicInfo(user);
+    }
 }
