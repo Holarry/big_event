@@ -66,4 +66,16 @@ public class CategoryController {
         categoryService.updateDetail(category);
         return Result.success();
     }
+
+    /**
+     * description: 根据分类id删除分类
+     *
+     * @param id: 分类id
+     * @return: com.holary.pojo.Result
+     */
+    @DeleteMapping
+    public Result delete(Integer id) {
+        categoryService.delete(id);
+        return Result.success();
+    }
 }

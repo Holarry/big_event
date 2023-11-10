@@ -40,4 +40,12 @@ public interface CategoryService {
      * @return: void
      */
     void updateDetail(Category category);
+
+    /**
+     * description: 根据分类id删除分类
+     *
+     * @param id: 分类id
+     * @return: void
+     */
+    void delete(Integer id);
 }

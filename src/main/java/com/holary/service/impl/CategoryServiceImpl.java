@@ -70,4 +70,15 @@ public class CategoryServiceImpl implements CategoryService {
     public void updateDetail(Category category) {
         categoryMapper.updateDetailById(category);
     }
+
+    /**
+     * description: 根据分类id删除分类
+     *
+     * @param id: 分类id
+     * @return: void
+     */
+    @Override
+    public void delete(Integer id) {
+        categoryMapper.delete(id);
+    }
 }
