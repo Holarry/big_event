@@ -22,4 +22,13 @@
         from category
         where id = #{id}
     </select>
+
+    <!--根据分类id修改分类信息-->
+    <update id="updateDetailById">
+        update category
+        set category_name  = #{categoryName},
+            category_alias = #{categoryAlias},
+            update_time    = now()
+        where id = #{id}
+    </update>
 </mapper>

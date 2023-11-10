@@ -54,4 +54,16 @@ public class CategoryController {
         Category category = categoryService.getDetail(id);
         return Result.success(category);
     }
+
+    /**
+     * description: 根据分类id修改分类信息
+     *
+     * @param category: 分类对象
+     * @return: com.holary.pojo.Result
+     */
+    @PutMapping
+    public Result updateDetail(@RequestBody @Validated Category category) {
+        categoryService.updateDetail(category);
+        return Result.success();
+    }
 }

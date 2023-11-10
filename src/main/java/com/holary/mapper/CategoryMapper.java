@@ -35,4 +35,12 @@ public interface CategoryMapper {
      * @return: com.holary.pojo.Category
      */
     Category selectCategoryDetailById(Integer id);
+
+    /**
+     * description: 根据分类id修改分类信息
+     *
+     * @param category: 分类对象
+     * @return: void
+     */
+    void updateDetailById(Category category);
 }

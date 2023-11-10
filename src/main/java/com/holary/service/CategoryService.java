@@ -32,4 +32,12 @@ public interface CategoryService {
      * @return: com.holary.pojo.Category
      */
     Category getDetail(Integer id);
+
+    /**
+     * description: 根据分类id修改分类信息
+     *
+     * @param category: 分类对象
+     * @return: void
+     */
+    void updateDetail(Category category);
 }

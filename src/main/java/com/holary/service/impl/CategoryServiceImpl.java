@@ -59,4 +59,15 @@ public class CategoryServiceImpl implements CategoryService {
     public Category getDetail(Integer id) {
         return categoryMapper.selectCategoryDetailById(id);
     }
+
+    /**
+     * description: 根据分类id修改分类信息
+     *
+     * @param category: 分类对象
+     * @return: void
+     */
+    @Override
+    public void updateDetail(Category category) {
+        categoryMapper.updateDetailById(category);
+    }
 }
