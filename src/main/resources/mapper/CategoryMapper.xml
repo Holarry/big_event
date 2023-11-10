@@ -8,4 +8,11 @@
         insert into category(category_name, category_alias, create_user, create_time, update_time)
         values (#{categoryName}, #{categoryAlias}, #{createUser}, #{createTime}, #{updateTime})
     </insert>
+
+    <!--根据用户id查询文章分类-->
+    <select id="selectCategoryByUserId" resultType="category">
+        select *
+        from category
+        where create_user = #{id}
+    </select>
 </mapper>

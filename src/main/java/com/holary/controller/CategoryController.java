@@ -5,10 +5,9 @@ import com.holary.pojo.Result;
 import com.holary.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Author: Holary
@@ -27,10 +26,20 @@ public class CategoryController {
      * @param category: 分类对象
      * @return: com.holary.pojo.Result
      */
-    @PostMapping()
+    @PostMapping
     public Result save(@RequestBody @Validated Category category) {
         categoryService.save(category);
         return Result.success();
     }
 
+    /**
+     * description: 查询文章分类
+     *
+     * @return: com.holary.pojo.Result<java.util.List < com.holary.pojo.Category>>
+     */
+    @GetMapping
+    public Result<List<Category>> list() {
+        List<Category> list = categoryService.list();
+        return Result.success(list);
+    }
 }

@@ -2,6 +2,8 @@ package com.holary.service;
 
 import com.holary.pojo.Category;
 
+import java.util.List;
+
 /**
  * @Author: Holary
  * @Date: 2023/11/9 17:57
@@ -15,4 +17,11 @@ public interface CategoryService {
      * @return: void
      */
     void save(Category category);
+
+    /**
+     * description: 查询文章分类
+     *
+     * @return: java.util.List<com.holary.pojo.Category>
+     */
+    List<Category> list();
 }
