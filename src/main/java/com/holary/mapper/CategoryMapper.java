@@ -27,4 +27,12 @@ public interface CategoryMapper {
      * @return: java.util.List<com.holary.pojo.Category>
      */
     List<Category> selectCategoryByUserId(Integer id);
+
+    /**
+     * description: 根据分类id查询分类详情
+     *
+     * @param id: 分类id
+     * @return: com.holary.pojo.Category
+     */
+    Category selectCategoryDetailById(Integer id);
 }

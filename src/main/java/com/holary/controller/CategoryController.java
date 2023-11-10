@@ -42,4 +42,16 @@ public class CategoryController {
         List<Category> list = categoryService.list();
         return Result.success(list);
     }
+
+    /**
+     * description: 根据分类id查询分类详情
+     *
+     * @param id: 分类id
+     * @return: com.holary.pojo.Result<com.holary.pojo.Category>
+     */
+    @GetMapping("/detail")
+    public Result<Category> getDetail(Integer id) {
+        Category category = categoryService.getDetail(id);
+        return Result.success(category);
+    }
 }

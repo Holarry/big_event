@@ -24,4 +24,12 @@ public interface CategoryService {
      * @return: java.util.List<com.holary.pojo.Category>
      */
     List<Category> list();
+
+    /**
+     * description: 根据分类id查询分类详情
+     *
+     * @param id: 分类id
+     * @return: com.holary.pojo.Category
+     */
+    Category getDetail(Integer id);
 }

@@ -48,4 +48,15 @@ public class CategoryServiceImpl implements CategoryService {
         Integer id = (Integer) map.get("id");
         return categoryMapper.selectCategoryByUserId(id);
     }
+
+    /**
+     * description: 根据分类id查询分类详情
+     *
+     * @param id: 分类id
+     * @return: com.holary.pojo.Category
+     */
+    @Override
+    public Category getDetail(Integer id) {
+        return categoryMapper.selectCategoryDetailById(id);
+    }
 }
