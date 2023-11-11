@@ -47,4 +47,16 @@ public class ArticleController {
         PageBean<Article> pageBean = articleService.list(pageNum, pageSize, categoryId, state);
         return Result.success(pageBean);
     }
+
+    /**
+     * description: 根据文章id查询文章详情
+     *
+     * @param id: 文章id
+     * @return: com.holary.pojo.Result<com.holary.pojo.Article>
+     */
+    @GetMapping("/detail")
+    public Result<Article> getDetail(Integer id) {
+        Article article = articleService.getDetail(id);
+        return Result.success(article);
+    }
 }

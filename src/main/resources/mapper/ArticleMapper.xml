@@ -22,4 +22,11 @@
             and create_user = #{userId}
         </where>
     </select>
+
+    <!--根据文章id查询文章详情-->
+    <select id="selectArticleDetailById" resultType="article">
+        select *
+        from article
+        where id = #{id}
+    </select>
 </mapper>

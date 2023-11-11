@@ -27,4 +27,12 @@ public interface ArticleService {
      * @return: com.holary.pojo.Result<com.holary.pojo.PageBean < com.holary.pojo.Article>>
      */
     PageBean<Article> list(Integer pageNum, Integer pageSize, Integer categoryId, String state);
+
+    /**
+     * description: 根据文章id查询文章详情
+     *
+     * @param id: 文章id
+     * @return: com.holary.pojo.Article
+     */
+    Article getDetail(Integer id);
 }

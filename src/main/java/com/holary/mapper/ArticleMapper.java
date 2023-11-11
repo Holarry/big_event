@@ -28,4 +28,12 @@ public interface ArticleMapper {
      * @return: com.github.pagehelper.Page<com.holary.pojo.Article>
      */
     Page<Article> selectArticleByPage(Integer userId, Integer categoryId, String state);
+
+    /**
+     * description: 根据文章id查询文章详情
+     *
+     * @param id: 文章id
+     * @return: com.holary.pojo.Article
+     */
+    Article selectArticleDetailById(Integer id);
 }

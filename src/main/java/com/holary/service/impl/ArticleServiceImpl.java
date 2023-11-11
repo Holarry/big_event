@@ -61,4 +61,15 @@ public class ArticleServiceImpl implements ArticleService {
         pageBean.setItems(articleList.getResult());
         return pageBean;
     }
+    
+    /**
+     * description: 根据文章id查询文章详情
+     *
+     * @param id: 文章id
+     * @return: com.holary.pojo.Article
+     */
+    @Override
+    public Article getDetail(Integer id) {
+        return articleMapper.selectArticleDetailById(id);
+    }
 }
