@@ -9,12 +9,15 @@ import com.holary.utils.ThreadLocalUtil;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author: Holary
@@ -27,6 +30,9 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     /**
      * description: 用户注册
@@ -72,6 +78,9 @@ public class UserController {
         claims.put("id", user.getId());
         claims.put("username", user.getUsername());
         String token = JwtUtil.genToken(claims);
+
+        ValueOperations<String, String> valueOperations = stringRedisTemplate.opsForValue();
+        valueOperations.set(token, token, 1, TimeUnit.HOURS);
 
         return Result.success(token);
     }
@@ -125,7 +134,7 @@ public class UserController {
      * @return: com.holary.pojo.Result
      */
     @PatchMapping("/updatePassword")
-    public Result updatePassword(@RequestBody Map<String, String> params) {
+    public Result updatePassword(@RequestBody Map<String, String> params, @RequestHeader("Authorization") String token) {
         String oldPwd = params.get("oldPwd");
         String newPwd = params.get("newPwd");
         String rePwd = params.get("rePwd");
@@ -150,6 +159,10 @@ public class UserController {
 
         // 修改密码
         userService.updatePassword(Md5Util.getMD5String(newPwd));
+        // 删除redis中对应的token
+        ValueOperations<String, String> valueOperations = stringRedisTemplate.opsForValue();
+        valueOperations.getOperations().delete(token);
+
         return Result.success();
     }
 }
