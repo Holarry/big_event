@@ -35,4 +35,12 @@ public interface ArticleService {
      * @return: com.holary.pojo.Article
      */
     Article getDetail(Integer id);
+
+    /**
+     * description: 根据文章id修改文章
+     *
+     * @param article: 文章对象
+     * @return: void
+     */
+    void update(Article article);
 }

@@ -29,4 +29,16 @@
         from article
         where id = #{id}
     </select>
+
+    <!--根据文章id修改文章-->
+    <update id="updateArticle">
+        update article
+        set title       = #{title},
+            content     = #{content},
+            cover_img   = #{coverImg},
+            state       = #{state},
+            category_id = #{categoryId},
+            update_time = now()
+        where id = #{id}
+    </update>
 </mapper>

@@ -36,4 +36,12 @@ public interface ArticleMapper {
      * @return: com.holary.pojo.Article
      */
     Article selectArticleDetailById(Integer id);
+
+    /**
+     * description: 根据文章id修改文章
+     *
+     * @param article: 文章对象
+     * @return: void
+     */
+    void updateArticle(Article article);
 }

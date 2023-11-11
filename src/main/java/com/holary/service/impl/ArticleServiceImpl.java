@@ -61,7 +61,7 @@ public class ArticleServiceImpl implements ArticleService {
         pageBean.setItems(articleList.getResult());
         return pageBean;
     }
-    
+
     /**
      * description: 根据文章id查询文章详情
      *
@@ -71,5 +71,16 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Article getDetail(Integer id) {
         return articleMapper.selectArticleDetailById(id);
+    }
+
+    /**
+     * description: 根据文章id修改文章
+     *
+     * @param article: 文章对象
+     * @return: void
+     */
+    @Override
+    public void update(Article article) {
+        articleMapper.updateArticle(article);
     }
 }

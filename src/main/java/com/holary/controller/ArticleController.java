@@ -59,4 +59,16 @@ public class ArticleController {
         Article article = articleService.getDetail(id);
         return Result.success(article);
     }
+
+    /**
+     * description: 根据文章id修改文章
+     *
+     * @param article: 文章对象
+     * @return: com.holary.pojo.Result
+     */
+    @PutMapping
+    public Result update(@RequestBody @Validated Article article) {
+        articleService.update(article);
+        return Result.success();
+    }
 }
