@@ -1,6 +1,7 @@
 package com.holary.service;
 
 import com.holary.pojo.Article;
+import com.holary.pojo.PageBean;
 
 /**
  * @Author: Holary
@@ -15,4 +16,15 @@ public interface ArticleService {
      * @return: void
      */
     void post(Article article);
+
+    /**
+     * description: 分页查询文章
+     *
+     * @param pageNum:    页码
+     * @param pageSize:   条数
+     * @param categoryId: 文章分类id
+     * @param state:      文章状态
+     * @return: com.holary.pojo.Result<com.holary.pojo.PageBean < com.holary.pojo.Article>>
+     */
+    PageBean<Article> list(Integer pageNum, Integer pageSize, Integer categoryId, String state);
 }

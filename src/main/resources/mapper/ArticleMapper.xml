@@ -8,4 +8,18 @@
         insert into article(title, content, cover_img, state, category_id, create_user, create_time, update_time)
         values (#{title}, #{content}, #{coverImg}, #{state}, #{categoryId}, #{createUser}, now(), now())
     </insert>
+
+    <!--分页查询文章-->
+    <select id="selectArticleByPage" resultType="article">
+        select * from article
+        <where>
+            <if test="categoryId != null">
+                category_id = #{categoryId}
+            </if>
+            <if test="state != null and state != ''">
+                and state = #{state}
+            </if>
+            and create_user = #{userId}
+        </where>
+    </select>
 </mapper>

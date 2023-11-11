@@ -1,5 +1,6 @@
 package com.holary.mapper;
 
+import com.github.pagehelper.Page;
 import com.holary.pojo.Article;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,4 +18,14 @@ public interface ArticleMapper {
      * @return: void
      */
     void insertArticle(Article article);
+
+    /**
+     * description: 分页查询文章
+     *
+     * @param userId:     用户id
+     * @param categoryId: 文章分类id
+     * @param state:      文章状态
+     * @return: com.github.pagehelper.Page<com.holary.pojo.Article>
+     */
+    Page<Article> selectArticleByPage(Integer userId, Integer categoryId, String state);
 }
