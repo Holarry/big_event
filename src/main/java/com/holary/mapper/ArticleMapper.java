@@ -44,4 +44,12 @@ public interface ArticleMapper {
      * @return: void
      */
     void updateArticle(Article article);
+
+    /**
+     * description: 根据文章id删除文章
+     *
+     * @param id: 文章id
+     * @return: void
+     */
+    void deleteArticleById(Integer id);
 }

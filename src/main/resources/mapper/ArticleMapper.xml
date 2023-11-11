@@ -41,4 +41,11 @@
             update_time = now()
         where id = #{id}
     </update>
+
+    <!--根据文章id删除文章-->
+    <delete id="deleteArticleById">
+        delete
+        from article
+        where id = #{id}
+    </delete>
 </mapper>

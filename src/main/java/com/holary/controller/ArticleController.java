@@ -71,4 +71,16 @@ public class ArticleController {
         articleService.update(article);
         return Result.success();
     }
+
+    /**
+     * description: 根据文章id删除文章
+     *
+     * @param id: 文章id
+     * @return: com.holary.pojo.Result
+     */
+    @DeleteMapping
+    public Result delete(Integer id) {
+        articleService.delete(id);
+        return Result.success();
+    }
 }

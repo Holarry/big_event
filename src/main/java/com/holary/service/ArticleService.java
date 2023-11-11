@@ -43,4 +43,12 @@ public interface ArticleService {
      * @return: void
      */
     void update(Article article);
+
+    /**
+     * description: 根据文章id删除文章
+     *
+     * @param id: 文章id
+     * @return: void
+     */
+    void delete(Integer id);
 }

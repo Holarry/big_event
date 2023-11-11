@@ -83,4 +83,15 @@ public class ArticleServiceImpl implements ArticleService {
     public void update(Article article) {
         articleMapper.updateArticle(article);
     }
+
+    /**
+     * description: 根据文章id删除文章
+     *
+     * @param id: 文章id
+     * @return: void
+     */
+    @Override
+    public void delete(Integer id) {
+        articleMapper.deleteArticleById(id);
+    }
 }
